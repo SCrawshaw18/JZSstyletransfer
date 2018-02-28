@@ -107,6 +107,8 @@ def ffwd(data_in, paths_out, checkpoint_dir, device_t='/gpu:0', batch_size=4):
             saver.restore(sess, checkpoint_dir)
 
         num_iters = int(len(paths_out)/batch_size)
+        print("num_iters:")
+        print(num_iters)
         for i in range(num_iters):
             print("hello")
             pos = i * batch_size
