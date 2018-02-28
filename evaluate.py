@@ -107,10 +107,9 @@ def ffwd(data_in, paths_out, checkpoint_dir, device_t='/gpu:0', batch_size=4):
             saver.restore(sess, checkpoint_dir)
 
         num_iters = int(len(paths_out)/batch_size)
-        print("num_iters:")
-        print(num_iters)
-        for i in range(num_iters):
-            print("hello")
+        print(len(paths_out))
+        print(len(batch_size))
+        for i in range(num_iters): #num_iters is 1
             pos = i * batch_size
             curr_batch_out = paths_out[pos:pos+batch_size]
             if is_paths:
@@ -128,7 +127,9 @@ def ffwd(data_in, paths_out, checkpoint_dir, device_t='/gpu:0', batch_size=4):
             _preds = sess.run(preds, feed_dict={img_placeholder:X})
             for j, path_out in enumerate(curr_batch_out):
                 save_img(path_out, _preds[j])
-                
+        
+        print(remaining_in)
+        print(remaining_out)       
         remaining_in = data_in[num_iters*batch_size:]
         remaining_out = paths_out[num_iters*batch_size:]
     if len(remaining_in) > 0:
@@ -137,6 +138,7 @@ def ffwd(data_in, paths_out, checkpoint_dir, device_t='/gpu:0', batch_size=4):
         print(remaining_out)
         ffwd(remaining_in, remaining_out, checkpoint_dir, 
             device_t=device_t, batch_size=1)
+
 
 def ffwd_to_img(in_path, out_path, checkpoint_dir, device='/cpu:0'):
     paths_in, paths_out = [in_path], [out_path]
