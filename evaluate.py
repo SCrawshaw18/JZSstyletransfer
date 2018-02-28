@@ -80,6 +80,8 @@ def ffwd(data_in, paths_out, checkpoint_dir, device_t='/gpu:0', batch_size=4):
     if is_paths:
         assert len(data_in) == len(paths_out)
         img_shape = get_img(data_in[0]).shape
+        print(len(data_in))
+        print(len(paths_out))
     else:
         assert data_in.size[0] == len(paths_out)
         img_shape = X[0].shape
@@ -113,6 +115,7 @@ def ffwd(data_in, paths_out, checkpoint_dir, device_t='/gpu:0', batch_size=4):
             curr_batch_out = paths_out[pos:pos+batch_size]
             if is_paths:
                 curr_batch_in = data_in[pos:pos+batch_size]
+                print(curr_batch_in)
                 X = np.zeros(batch_shape, dtype=np.float32)
                 for j, path_in in enumerate(curr_batch_in):
                     img = get_img(path_in)
@@ -131,8 +134,8 @@ def ffwd(data_in, paths_out, checkpoint_dir, device_t='/gpu:0', batch_size=4):
         remaining_in = data_in[num_iters*batch_size:]
         remaining_out = paths_out[num_iters*batch_size:]
         print("this is remainings")
-        print(remaining_in)
-        print(remaining_out) 
+        print(len(remaining_in))
+        print(len(remaining_out))
     if len(remaining_in) > 0:
         print("SUCCESS RATES ARE: ")
         print(remaining_in)
