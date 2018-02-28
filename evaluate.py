@@ -128,6 +128,7 @@ def ffwd(data_in, paths_out, checkpoint_dir, device_t='/gpu:0', batch_size=4):
         remaining_in = data_in[num_iters*batch_size:]
         remaining_out = paths_out[num_iters*batch_size:]
     if len(remaining_in) > 0:
+        print("SUCCESS RATES ARE: ")
         print(remaining_in)
         print(remaining_out)
         ffwd(remaining_in, remaining_out, checkpoint_dir, 
