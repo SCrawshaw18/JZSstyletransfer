@@ -12,10 +12,13 @@ cloudinary.config(
 def findIndex(s, ch):
     return [i for i, ltr in enumerate(s) if ltr == ch]
 
-url=cloudinary.CloudinaryImage("Tiger_def9hk.jpg").image(effect="contrast:35")
-pos=findIndex(url,"\"")
-url=url[pos[0]+1:pos[1]]
+def getUrl(s):
+	pos=findIndex(s,"\"")
+	return(s[pos[0]+1:pos[1]])
 
-response = requests.get(url)
-img = Image.open(BytesIO(response.content))
-img.show()
+def getImage(url):
+	response = requests.get(url)
+	return(Image.open(BytesIO(response.content)))
+	
+url=getUrl(cloudinary.CloudinaryImage("Tiger_def9hk.jpg").image(effect="contrast:100"))
+getImage(url).show()
