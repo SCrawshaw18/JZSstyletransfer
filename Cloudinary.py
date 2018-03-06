@@ -4,6 +4,9 @@ import requests
 from io import BytesIO
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+import evaluate as net
+from datetime import datetime
 
 cloudinary.config( 
   cloud_name = "ask-milton", 
@@ -47,15 +50,23 @@ for i in range(1): #for testing
 	for j in range(1): #for testing
 	#for j in range(len(mods)): #runs through all mods
 		print(imgnames[i].split("_")[0] + ': ' + mods[j])
-		images = [] # construct empty list used to store images pulled from Cloudinary
-		#error = [] #uncomment when you input error using neural net
+		#images = [] # construct empty list used to store images pulled from Cloudinary
+		error = [] #uncomment when you input error using neural net
 
 		for k in range(num): # runs for different levels of mod for 'num' times
 			url=cloudinary.CloudinaryImage(imgnames[i]).image(effect=mods[j] + ":" + str((k+1)*10)) # set url for image along with modification
 			pos=findIndex(url,"\"")
-			images.append(Image.open(BytesIO(requests.get(url[pos[0]+1:pos[1]]).content))) # adds image to 'images' list
-			#run images[k] through neural network
-			#error.append(error from neural network)
+			image=requests.get(url[pos[0]+1:pos[1]]).content
+			with open('currentImage.jpg', 'wb') as handler:
+				handler.write(image)
+			print(datetime.now().time())
+			net.ffwd_mod(["/Users/scottcrawshaw/Programming/JZSstyletransfer/currentImage.jpg"],["/Users/scottcrawshaw/Programming/JZSstyletransfer/results/currentImage.jpg"])
+			print(datetime.now().time())
+			imgplot = plt.imshow(Image.open("/Users/scottcrawshaw/Programming/JZSstyletransfer/results/currentImage.jpg"))
+			plt.ion()
+			plt.show()
+			error.append(int(input("Rate the image on a scale from 1-10: ")))
+			plt.close()
 
 		##############graphing
 		plt.scatter([10*x for x in range(num)], np.random.rand(num), s=np.pi*8, c=colors[j], marker=marker[j], alpha=0.5, label=mods[j]) # automatically adjusts axes based on numbers
