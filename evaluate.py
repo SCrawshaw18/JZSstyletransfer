@@ -72,9 +72,6 @@ def ffwd_video(path_in, path_out, checkpoint_dir, device_t='/gpu:0', batch_size=
 
 # get img_shape
 def ffwd(data_in, paths_out, checkpoint_dir, device_t='/gpu:0', batch_size=4):
-    print(data_in)
-    print(paths_out)
-    print(checkpoint_dir)
     assert len(paths_out) > 0
     is_paths = type(data_in[0]) == str
     if is_paths:
@@ -143,14 +140,12 @@ def ffwd(data_in, paths_out, checkpoint_dir, device_t='/gpu:0', batch_size=4):
         ffwd(remaining_in, remaining_out, checkpoint_dir, 
             device_t=device_t, batch_size=1)
 
-def ffwd_mod(data_in, paths_out, checkpoint_dir="/Users/scottcrawshaw/Programming/JZSstyletransfer/scream.ckpt", device_t='/gpu:0', batch_size=4):
+def ffwd_mod(data_in, paths_out, checkpoint_dir="scream.ckpt", device_t='/gpu:0', batch_size=4):
     assert len(paths_out) > 0
     is_paths = type(data_in[0]) == str
     if is_paths:
         assert len(data_in) == len(paths_out)
         img_shape = get_img(data_in[0]).shape
-        print(len(data_in))
-        print(len(paths_out))
     else:
         assert data_in.size[0] == len(paths_out)
         img_shape = X[0].shape
@@ -184,7 +179,6 @@ def ffwd_mod(data_in, paths_out, checkpoint_dir="/Users/scottcrawshaw/Programmin
             curr_batch_out = paths_out[pos:pos+batch_size]
             if is_paths:
                 curr_batch_in = data_in[pos:pos+batch_size]
-                print(curr_batch_in)
                 X = np.zeros(batch_shape, dtype=np.float32)
                 for j, path_in in enumerate(curr_batch_in):
                     img = get_img(path_in)
@@ -202,13 +196,7 @@ def ffwd_mod(data_in, paths_out, checkpoint_dir="/Users/scottcrawshaw/Programmin
               
         remaining_in = data_in[num_iters*batch_size:]
         remaining_out = paths_out[num_iters*batch_size:]
-        print("this is remainings")
-        print(len(remaining_in))
-        print(len(remaining_out))
     if len(remaining_in) > 0:
-        print("SUCCESS RATES ARE: ")
-        print(remaining_in)
-        print(remaining_out)
         ffwd(remaining_in, remaining_out, checkpoint_dir, 
             device_t=device_t, batch_size=1)
 def ffwd_to_img(in_path, out_path, checkpoint_dir, device='/cpu:0'):
