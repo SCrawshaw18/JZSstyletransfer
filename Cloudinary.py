@@ -1,3 +1,4 @@
+#this file pulls transformed images from cloudinary, stylizes them, and saves the result. Would've graphed the results if we had a quantatative measurment of success.
 import cloudinary
 from PIL import Image
 import requests
@@ -6,7 +7,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import evaluate as net
-from datetime import datetime
 
 cloudinary.config( 
   cloud_name = "ask-milton", 
@@ -33,8 +33,8 @@ imgnames = ['Stadium_pp9rdb.jpg' ,
 'Baby_r4vbbd.jpg' ,
 'Desert_zsmnhl.jpg'] # possible names for all images uploaded to Cloudinary
 
-colors = ['b','r','g','k','y','m'] # colors used for graphing
-marker = ['o','^','v','*','+','x'] # markers of data points used for graphing
+#colors = ['b','r','g','k','y','m'] # colors used for graphing
+#marker = ['o','^','v','*','+','x'] # markers of data points used for graphing
  
 mods = ['tint',
 'saturation',
@@ -45,10 +45,8 @@ mods = ['tint',
 
 num = 10 # number of degress of manipulations we will do for each mod
 
-for i in range(len(imgnames)): #for testing
-#for i in range(len(imgnames)): #runs through all images
-	for j in range(len(mods)): #for testing
-	#for j in range(len(mods)): #runs through all mods
+for i in range(len(imgnames)):
+	for j in range(len(mods)):
 		#print(imgnames[i].split("_")[0] + ': ' + mods[j])
 		#images = [] # construct empty list used to store images pulled from Cloudinary
 		#error = [] #uncomment when you input error using neural net
