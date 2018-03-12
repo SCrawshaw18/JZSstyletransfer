@@ -10,5 +10,5 @@ Our secondary file, transformedPics.py, does the same thing as Cloudinary.py, bu
 ## Image Folders
 We have two image folders: results and transformed_images. The transformed_images folder has all the transformed images, while the results folder has the stylized version of the transformed images. We made these two folders so we could compare the inital image to the stylized image.
 
-## Special Thanks
+# Special Thanks
 We'd like to thank Logan Engstrom for creating the [fast style transfer CNN](https://github.com/lengstrom/fast-style-transfer) that we used for the image stylization. We'd also like to give a shoutout to [Cloudinary](https://cloudinary.com/) for giving us 10,000 free image transformations. Finally, we'd like to thank [Ms. Pries](https://github.com/MsPries) for being a great mentor to us throughout the project period.
