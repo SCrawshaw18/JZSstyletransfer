@@ -43,7 +43,8 @@ for i in range(len(imgnames)): #for testing
 	for j in range(len(mods)): #for testing
 		for k in range(num): # runs for different levels of mod for 'num' times
 			url=cloudinary.CloudinaryImage(imgnames[i]).image(effect=mods[j] + ":" + str((k+1)*10)) # set url for image along with modification
-			name=mods[j] + "-" + str((k+1)*10)
+			x = imgnames[i].index("_")
+			name=imgnames[i][:x] + "-" + mods[j] + "-" + str((k+1)*10)
 			print("%s, %s"%(imgnames[i],name))
 			pos=findIndex(url,"\"")
 			image=requests.get(url[pos[0]+1:pos[1]]).content
