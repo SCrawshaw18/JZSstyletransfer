@@ -48,5 +48,5 @@ for i in range(len(imgnames)): #for testing
 			print("%s, %s"%(imgnames[i],name))
 			pos=findIndex(url,"\"")
 			image=requests.get(url[pos[0]+1:pos[1]]).content
-			with open("transformed_images/%s.jpg"%(name), 'wb') as handler:
+			with open("transformed_images/%s.jpg"%(imgnames[i]+"-" +name), 'wb') as handler:
 				handler.write(image)
