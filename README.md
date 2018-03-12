@@ -1,2 +1,2 @@
-##Introduction
+#Introduction
 Our group set out to determine how stylistic elements on a photograph would affect the success of style transfer. First, we collected an assortment of different images. Then, using an image editing API called "Cloudinary", we increased the contrast, blurriness, brightness, saturation, sepia, and red tint on each image in increments of 10%. We then passed these images through a style transfer neural network using the style of Edvard Munch's "The Scream". We compiled these images into a gallery and observed the results, noting the impact of transformations on the style transfer results.
